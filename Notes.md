@@ -139,6 +139,73 @@ SWITCH STATEMENTS
         }
     }
 
+The following notes are from https://www.youtube.com/playlist?list=PLX2vGYjWbI0RCmCHa3dDKblhJPpW9ZXnu
+
+COLLIDERS
+- can be sphere, capsule, box/cube
+- for complex objects use multiple of the above or a mesh collider
+- when there is a collision, a method called OnCollisionEnter is called
+- in a script use, OnCollisionEnter, OnCollisionStay, OnCollisionExit
+
+COLLIDERS AS TRIGGERS
+- check the is trigger check box in the collider component
+- things will pass through the trigger collider object (invisible box to check for a collision)
+- in a script use, OnTriggerEnter, OnTriggerStay, OnTriggerExit
+- typically triggers are static
+- needs to be collided by a rigidbody object
+
+RIGIDBODIES
+- If there is a moving object, it should be rigidbody
+- rigidbodies allow for physics on objects
+- required for physics on objects and needs a collider 
+- component box has isGravity option
+- use kinematic for pong ball or paddle
+- kinematics can be moved using the transform function
+
+ADDFORCE
+- adds force to a physics object
+- has one required parameter, a vector 3 that represents direction and magnitude
+- optional parameter is ForceMode Acceleration/force/impulse/velocityChange
+
+ADDTORQUE
+- similar to addforce but instead applies force to rotate an object around a specific axis
+- required parameter is a direction such as transform.up
+- optional parameter is ForceMode Acceleration/force/impulse/velocityChange
+
+PHYSICS MATERIALS
+- can be created in the project panel
+- dynamic friction is how much friciton exists while object is moving
+- static friction is how much force is required to move the object from a static position
+
+JOINTS
+- fixed joints lock an object in place
+- spring joints are connected to one pivot point. any rigidbodies attached to the other end will make them move.
+- hinge joints are ideal for things like doors
+ - the axis of the hinge is where it will rotate around, like a door.
+
+RAYCASTING
+- used for things like shooting guns
+- Physics.Raycast(Vector3 origin (typically a gun barrel), Vector3 direction, RaycastHit hitInfo (checks for object that are hit by the raycast), *optional* float distance (the length of the ray), int LayerMask (can place objects that you want the ray to ignore))
+- use Debug.DrawRay(parameters look up) to draw a ray for debug purposes
+
+DETECTING COLLISIONS
+- one of the two colliding objects needs a OnCollisionEnter(Collision variable)
+- you can do things in this function on collision such as Destroy(variable.?)
+
+
+
+
+TRANSLATE VS RIGIDBODY from https://www.youtube.com/watch?v=ixM2W2tPn6c
+- translate
+    - translate is the easiest to setup
+    - create a move function with a vector position parameter. in the function, transform.translate(direction * time.deltatime * speed)
+    - no collision detection, overrides unity physics, better used for animation without physics
+
+- rigidbody
+    - setup same as translate but create a public rigidbody variable at the top of the class
+    - define rb in start method
+    - use fixedupdate method instead of update because of the use of physics
+    - rb.Addforcs, rb.velocity, rb.movePosition
 
 
 
